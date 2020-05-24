@@ -2,7 +2,9 @@ import { createStore as createReduxStore, applyMiddleware, compose, combineReduc
 import createSagaMiddleware from 'redux-saga'
 
 import globalReducer from './global/reducer'
+import productsReducer from './products/reducer'
 import globalWatcher from './global/saga'
+import productsWatcher from './products/saga'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const sagaMiddleware = createSagaMiddleware()
@@ -12,6 +14,7 @@ const createStore = () => {
 
   const appReducer = combineReducers({
     global: globalReducer,
+    products: productsReducer,
   })
 
   const rootReducer = (state, action) => {
@@ -24,6 +27,7 @@ const createStore = () => {
   )
 
   sagaMiddleware.run(globalWatcher)
+  sagaMiddleware.run(productsWatcher)
 
   return redux
 }
