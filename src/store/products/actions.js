@@ -47,7 +47,9 @@ export const requestUpdateProduct = async payload => {
 export const requestDeleteProduct = async payload => {
   try {
     const request = await API.delete('/private/products', {
-      ...payload,
+      params: {
+        id: payload.id,
+      },
     })
     return request.data
   } catch (error) {

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Redirect, Router, } from '@reach/router'
+import { Redirect, } from '@reach/router'
 import { useSelector, } from 'react-redux'
-import Home from './Home'
 
-export default function Online () {
+export default function Online (props) {
   const { token, } = useSelector(state => state.global)
 
   if (!token) {
@@ -12,9 +11,9 @@ export default function Online () {
 
   return (
     <div>
-      <Router>
-        <Home path={'/'}/>
-      </Router>
+      <React.Fragment>
+        {props.children}
+      </React.Fragment>
     </div>
   )
 }
