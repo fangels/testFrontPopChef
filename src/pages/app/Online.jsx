@@ -1,11 +1,20 @@
 import React from 'react'
-import { Router, } from '@reach/router'
+import { Redirect, Router, } from '@reach/router'
+import { useSelector, } from 'react-redux'
 import Home from './Home'
 
-export default function Online (props) {
+export default function Online () {
+  const { token, } = useSelector(state => state.global)
+
+  if (!token) {
+    return <Redirect noThrow to={'/login'} />
+  }
+
   return (
-    <Router>
-      <Home path={'/'}/>
-    </Router>
+    <div>
+      <Router>
+        <Home path={'/'}/>
+      </Router>
+    </div>
   )
 }
