@@ -1,11 +1,10 @@
 import axios from 'axios'
 
 import config from './index'
-import { store, } from '../store'
 
 const initInterceptorRequest = (client) => {
   client.interceptors.request.use((requestConfig) => {
-    const token = store.getState(global).token
+    const token = localStorage.getItem('token')
     if (token) requestConfig.headers.authorization = 'Bearer ' + token
     return requestConfig
   })

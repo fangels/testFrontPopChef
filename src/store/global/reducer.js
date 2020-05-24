@@ -3,12 +3,14 @@ import { GET_TOKEN_FAILED, GET_TOKEN_REQUEST, GET_TOKEN_SUCCESS, } from './const
 const initialState = {
   error: false,
   loading: false,
-  token: null,
+  token: localStorage.getItem('token'),
 }
 
 export default (state = initialState, { type, payload, }) => {
   switch (type) {
     case GET_TOKEN_SUCCESS:
+      localStorage.setItem('token', payload)
+
       return {
         error: false,
         loading: false,
